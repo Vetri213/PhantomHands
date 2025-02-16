@@ -1,0 +1,136 @@
+// Motor A (Driver 1)
+int enA = 9;
+int in1 = 8;
+int in2 = 7;
+
+// Motor B (Driver 1)
+int enB = 3;
+int in3 = 5;
+int in4 = 4;
+
+// Motor C (Driver 2)
+int enC = 10;
+int in5 = 12;
+int in6 = 11;
+
+// Motor D (Driver 2)
+int enD = 6;
+int in7 = A0;  // Using analog pins for compatibility
+int in8 = A1;
+
+int num = 0;  // Stores the current command received from serial
+
+void setup() {
+  Serial.begin(115200);  // High baud rate for fast communication
+
+  // Set motor control pins as outputs
+  pinMode(enA, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  pinMode(enC, OUTPUT);
+  pinMode(in5, OUTPUT);
+  pinMode(in6, OUTPUT);
+  pinMode(enD, OUTPUT);
+  pinMode(in7, OUTPUT);
+  pinMode(in8, OUTPUT);
+
+  pinMode(A0, OUTPUT);
+  pinMode(A1, OUTPUT);
+
+  stopMotors();  // Ensure motors are off at the start
+}
+
+void loop() {
+  // Check if there is incoming data
+  if (Serial.available() > 0) {
+    num = Serial.parseInt();  // Convert received data to integer
+    Serial.print("ACK: ");
+    Serial.println(num);  // Confirm the received command
+  }
+
+  // Execute the corresponding movement based on received command
+  switch (num) {
+    case 3:
+      forward();
+      break;
+    case 4:
+      back();
+      break;
+    case 5:
+      right();
+      break;
+    case 6:
+      left();
+      break;
+    case 0:
+      stopMotors();
+      break;
+    case 1:
+      stopMotors();
+      break;
+    case 2:
+      stopMotors();
+      break;
+  }
+}
+
+// Moves the robot forward
+void forward() {
+  moveMotor(enA, in1, in2, 255, true);
+  moveMotor(enB, in3, in4, 255, true);
+  moveMotor(enC, in5, in6, 255, true);
+  moveMotor(enD, in7, in8, 255, true);
+}
+
+// Moves the robot backward
+void back() {
+  moveMotor(enA, in1, in2, 255, false);
+  moveMotor(enB, in3, in4, 255, false);
+  moveMotor(enC, in5, in6, 255, false);
+  moveMotor(enD, in7, in8, 255, false);
+}
+
+// Rotates the robot to the right
+void right() {
+  moveMotor(enA, in1, in2, 255, true);
+  moveMotor(enB, in3, in4, 255, true);
+  moveMotor(enC, in5, in6, 255, false);
+  moveMotor(enD, in7, in8, 255, false);
+}
+
+// Rotates the robot to the left
+void left() {
+  moveMotor(enA, in1, in2, 255, false);
+  moveMotor(enB, in3, in4, 255, false);
+  moveMotor(enC, in5, in6, 255, true);
+  moveMotor(enD, in7, in8, 255, true);
+}
+
+// Controls a specific motor's direction and speed
+void moveMotor(int enPin, int dirPin1, int dirPin2, int speed, bool forward) {
+  analogWrite(enPin, speed);  // Set speed
+  digitalWrite(dirPin1, forward ? HIGH : LOW);
+  digitalWrite(dirPin2, forward ? LOW : HIGH);
+}
+
+// Stops all motors
+void stopMotors() {
+  analogWrite(enA, 0);
+  analogWrite(enB, 0);
+  analogWrite(enC, 0);
+  analogWrite(enD, 0);
+
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+  digitalWrite(in5, LOW);
+  digitalWrite(in6, LOW);
+  digitalWrite(in7, LOW);
+  digitalWrite(in8, LOW);
+
+  Serial.println("All motors stopped.");
+}
