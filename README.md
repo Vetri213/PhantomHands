@@ -2,7 +2,7 @@
 
 A real-time hand-controlled robot that uses computer vision to drive a 4-wheeled omnidirectional vehicle via gesture recognition.
 
-![Phantom Hands](./images/demo.jpg)
+![Phantom Hands](/Image.jpg)
 
 ---
 
@@ -37,7 +37,7 @@ Built at **MakeUofT 2024** over a period of 24 hours, this project merges gestur
 
 ## 🎥 Demo Video
 
-[![Watch the Demo](./images/demo-thumbnail.jpg)](https://www.youtube.com/watch?v=your-demo-link)
+[![Watch the Demo](Image.jpg)](https://www.youtube.com/watch?v=your-demo-link)
 
 > _Note: For demo purposes, the rear wheels were kept stationary while the front motors demonstrated gesture-controlled movement. The full codebase supports 4-wheel synchronized drive, and all motors were successfully tested._
 
