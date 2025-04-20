@@ -37,7 +37,7 @@ Built at **MakeUofT 2024** over a period of 24 hours, this project merges gestur
 
 ## 🎥 Demo Video
 
-[![Watch the Demo](Image.jpg)](https://www.youtube.com/watch?v=your-demo-link)
+[![Watch the Demo](Image.jpg)]([Check it out!](https://youtu.be/3SegIgImHzs))
 
 > _Note: For demo purposes, the rear wheels were kept stationary while the front motors demonstrated gesture-controlled movement. The full codebase supports 4-wheel synchronized drive, and all motors were successfully tested._
 
